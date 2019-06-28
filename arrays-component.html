@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<dom-module id="arrays-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <dom-repeat items="[[tasks]]" as="task">
+      <template>
+        <h2>[[task.name]]</h2>
+        <h5>[[obj.name]]</h5>
+      </template>
+    </dom-repeat>
+    <button on-click="_addItem">Add new</button>
+    <button on-click="_removeItem">Remove item</button>
+  </template>
+
+  <script>
+    /**
+     * `arrays-component`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ArraysComponent extends Polymer.Element {
+      static get is() { return 'arrays-component'; }
+      static get properties() {
+        return {
+          tasks: {
+            type: Array,
+            value: [{name: 'aldo'}, {name: 'saul'}]
+          },
+          obj: {
+            type: Object,
+            value: {
+              name: 'a'
+            }
+          }
+        };
+      }
+      _addItem() {
+        this.push('tasks', {name: 'a'});
+        this.set('obj.name', 'string');
+      }
+      _removeItem() {
+        this.pop('tasks');
+      }
+    }
+
+    window.customElements.define(ArraysComponent.is, ArraysComponent);
+  </script>
+</dom-module>
